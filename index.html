@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Feixi (Sersi) Wu: research, community, art, and life between Haining and Omaha.">
+<title>Feixi (Sersi) Wu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Courier+Prime:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Layout: a zine-style personal space. Forest-green board, pink cut paper, halftone portrait, typewriter labels, silver-and-lace stickers; one tabbed "room" per part of her life, academics last. Single committed dark look. */
+:root {
+  --board: #2E4633;
+  --board-deep: #24382A;
+  --board-line: #4A6450;
+  --pink: #EBA8C2;
+  --pink-deep: #D987A8;
+  --cream: #F3EDE1;
+  --paper: #FBF7EF;
+  --ink: #1F2A22;
+  --text: #EEF0E8;
+  --muted: #B9C6B9;
+  --f-mark: 'Permanent Marker', 'Marker Felt', cursive;
+  --f-type: 'Courier Prime', 'Courier New', monospace;
+  --f-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --f-hand: 'Caveat', 'Bradley Hand', cursive;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body { background: var(--pink); color: var(--text); font-family: var(--f-body); font-size: 16.5px; line-height: 1.65; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--pink); }
+a { color: var(--pink); text-underline-offset: 3px; }
+button { font: inherit; }
+:focus-visible { outline: 2px dashed var(--pink); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+.type { font-family: var(--f-type); text-transform: uppercase; letter-spacing: 0.08em; font-size: 12.5px; }
+.hand { font-family: var(--f-hand); font-weight: 700; }
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* stickers */
+.deco { position: absolute; pointer-events: none; z-index: 3; filter: drop-shadow(0 5px 7px rgba(0,0,0,0.35)); }
+.deco svg, .hd svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.hd { display: inline-block; vertical-align: middle; width: 0.95em; height: 0.95em; margin-left: 0.18em; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35)); }
+
+/* the board sits inside a pink frame */
+.frame { padding: 14px max(14px, env(safe-area-inset-right, 0px)) 18px max(14px, env(safe-area-inset-left, 0px)); }
+.board { background: var(--board); border-radius: 22px; overflow: hidden; position: relative; }
+
+/* top bar */
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 22px clamp(18px, 4vw, 44px) 10px; flex-wrap: wrap; position: relative; z-index: 4; }
+.brand { color: var(--cream); text-decoration: none; padding-bottom: 8px; border-bottom: 1px solid var(--cream); }
+.tabs { display: flex; gap: 6px 22px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.tabs button { background: none; border: 0; color: var(--cream); cursor: pointer; padding: 6px 0; position: relative; }
+.tabs button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--pink); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.tabs button:hover::after, .tabs button[aria-selected="true"]::after { transform: scaleX(1); }
+.tabs button[aria-selected="true"] { color: var(--pink); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 34px; align-items: center; padding: 30px clamp(18px, 4vw, 44px) 60px; position: relative; }
+.hero .hello { color: var(--pink); font-weight: 700; }
+.hero h1 { font-family: var(--f-mark); font-weight: 400; color: var(--pink); font-size: clamp(72px, 12vw, 150px); line-height: 0.92; letter-spacing: 0.01em; margin: 6px 0 18px; transform: rotate(-2deg); transform-origin: left; display: inline-block; position: relative; }
+.hero h1 .deco { width: 0.5em; height: 0.46em; right: -0.55em; top: 0.02em; transform: rotate(14deg); }
+.hero .full { font-family: var(--f-type); color: var(--cream); font-size: 14px; margin-bottom: 12px; }
+.hero .lede { max-width: 31em; color: var(--text); font-size: 17px; }
+.oval { display: inline-block; white-space: nowrap; margin-top: 26px; font-family: var(--f-type); font-size: 13px; color: var(--cream); padding: 10px 26px; border: 1.5px solid var(--cream); border-radius: 50%; transform: rotate(-3deg); }
+.hero .swirl { left: 46%; top: -20px; width: 170px; height: 128px; opacity: 0.9; transform: rotate(8deg); }
+
+.collage { position: relative; min-height: 560px; }
+.collage .pinkpaper { position: absolute; inset: 7% 4% 9% 20%; background: var(--pink); transform: rotate(6deg); }
+.collage .me { position: absolute; left: 0; top: 3%; width: 60%; height: 72%; background: var(--paper); padding: 9px; transform: rotate(-4deg); box-shadow: 0 18px 40px rgba(0,0,0,0.35); clip-path: polygon(0 2%, 100% 0, 98% 100%, 2% 97%); }
+.collage .me img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; filter: grayscale(1) contrast(1.05); cursor: default; }
+.collage .hydra { position: absolute; right: 12%; top: 3%; width: 60%; margin: 0; background: var(--paper); padding: 8px 8px 6px; transform: rotate(3deg); box-shadow: 0 18px 36px rgba(0,0,0,0.4); z-index: 2; }
+.hydra img { display: block; width: 100%; aspect-ratio: 760 / 929; object-fit: cover; cursor: zoom-in; }
+.hydra figcaption { font-family: var(--f-hand); font-weight: 500; font-size: 19px; color: var(--ink); line-height: 1.1; padding-top: 5px; text-align: center; }
+.hydra::before { content: ""; position: absolute; top: -10px; left: 36%; width: 74px; height: 20px; background: rgba(243,237,225,0.7); transform: rotate(-4deg); }
+.collage .bfly { right: -3%; bottom: 4%; width: 86px; height: 70px; transform: rotate(-14deg); z-index: 4; }
+.star { position: absolute; right: -2%; top: -3%; width: 112px; height: 112px; cursor: pointer; transition: transform .5s ease; background: none; border: 0; padding: 0; z-index: 4; }
+.star:hover { transform: rotate(40deg) scale(1.06); }
+.star svg { width: 100%; height: 100%; }
+.sticker { position: absolute; left: -5%; top: 1%; z-index: 3; background: var(--cream); color: var(--ink); font-family: var(--f-hand); font-size: 22px; line-height: 1.1; padding: 8px 14px; transform: rotate(-6deg); box-shadow: 0 6px 14px rgba(0,0,0,0.3); max-width: 200px; }
+.art-ghost { position: absolute; pointer-events: none; opacity: 0.3; }
+.art-ghost img { display: block; width: 100%; }
+.ghost-1 { left: -36px; bottom: -70px; width: 230px; transform: rotate(-9deg); }
+.collage .boat { position: absolute; left: -5%; bottom: 1%; width: 165px; background: var(--paper); padding: 7px 7px 4px; transform: rotate(-7deg); box-shadow: 0 10px 22px rgba(0,0,0,0.35); z-index: 3; margin: 0; }
+.boat img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; cursor: zoom-in; }
+.boat figcaption { font-family: var(--f-hand); font-weight: 500; font-size: 17px; color: var(--ink); line-height: 1.1; padding-top: 4px; }
+
+/* rooms */
+.rooms { background: var(--board-deep); border-top: 1px dashed var(--board-line); padding: 42px clamp(18px, 4vw, 44px) 56px; }
+.room[hidden] { display: none; }
+.room-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; margin-bottom: 30px; }
+.room-head h2 { font-family: var(--f-mark); font-weight: 400; color: var(--pink); font-size: clamp(38px, 6vw, 64px); line-height: 1; }
+.room-head p { color: var(--muted); max-width: 46em; margin-top: 10px; }
+.room-head .count { color: var(--cream); white-space: nowrap; }
+
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 22px; align-items: start; }
+.span-7 { grid-column: span 7; } .span-5 { grid-column: span 5; } .span-6 { grid-column: span 6; } .span-4 { grid-column: span 4; } .span-8 { grid-column: span 8; } .span-12 { grid-column: span 12; }
+
+/* paper slips */
+.slip { background: var(--paper); color: var(--ink); border-radius: 3px; padding: 22px 24px 20px; position: relative; box-shadow: 0 10px 22px rgba(0,0,0,0.25); min-width: 0; }
+.slip .type { color: #5D6E61; }
+.slip h3 { font-family: var(--f-body); font-weight: 700; font-size: 21px; line-height: 1.25; margin: 6px 0 8px; color: var(--ink); text-wrap: balance; }
+.slip p, .slip li { font-size: 15.5px; line-height: 1.6; color: #2E3A31; }
+.slip ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.slip .more { margin-top: 12px; }
+.slip .more[hidden] { display: none; }
+.slip .deco { width: 58px; height: 58px; top: -22px; right: -14px; }
+.toggle { margin-top: 12px; background: none; border: 1.5px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 5px 14px; cursor: pointer; font-family: var(--f-type); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+.toggle:hover { background: var(--ink); color: var(--paper); }
+.pin::before { content: ""; position: absolute; top: -9px; left: 22px; width: 70px; height: 18px; background: rgba(235,168,194,0.85); transform: rotate(-3deg); }
+.pink-slip { background: var(--pink); }
+.pink-slip p, .pink-slip li { color: #2A2026; }
+.pink-slip .type { color: #6B3E50; }
+
+.photo { margin: 0; background: var(--paper); padding: 8px 8px 10px; box-shadow: 0 10px 22px rgba(0,0,0,0.3); position: relative; min-width: 0; }
+.photo img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+.photo figcaption { font-family: var(--f-hand); font-weight: 500; font-size: 20px; color: var(--ink); padding: 6px 4px 0; line-height: 1.15; }
+.photo .deco { width: 64px; height: 64px; top: -24px; right: -18px; }
+.tilt-a { transform: rotate(-1.4deg); } .tilt-b { transform: rotate(1.2deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .photo, .slip { transition: transform .3s ease; }
+  .photo:hover, .slip:hover { transform: rotate(0deg) translateY(-3px); }
+}
+.strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.strip .photo img { aspect-ratio: 3 / 4; object-fit: cover; }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.duo .photo img { aspect-ratio: 4 / 3; object-fit: cover; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.trio .photo { padding: 5px; }
+
+.facts { display: flex; flex-wrap: wrap; gap: 14px 30px; margin: 4px 0 10px; }
+.fact .n { font-family: var(--f-mark); font-size: 34px; line-height: 1; color: var(--pink-deep); font-variant-numeric: tabular-nums; }
+.fact .t { font-family: var(--f-type); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #5D6E61; }
+
+.finding { border-left: 3px solid var(--pink-deep); padding: 2px 0 2px 14px; margin-top: 12px; }
+.finding .type { color: var(--pink-deep); }
+
+.list { display: grid; gap: 0; }
+.list .row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; padding: 11px 0; border-bottom: 1px dashed #C9C2B4; align-items: baseline; }
+.list .row:last-child { border-bottom: 0; }
+.list .row .w { font-size: 15.5px; color: var(--ink); }
+.list .row .w small { display: block; color: #66736A; font-size: 13.5px; }
+.list .row .l { font-family: var(--f-type); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink-deep); white-space: nowrap; }
+.pink-slip .list .row { border-color: #C98AA3; }
+.pink-slip .list .row .l { color: #7A3A55; }
+
+.dy { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 6px 0 14px; }
+.dy .btn { text-decoration: none; }
+.slip .dy .type { color: #5D6E61; text-transform: none; }
+.note { color: var(--muted); font-size: 14px; margin-top: 18px; }
+.note a { color: var(--pink); }
+
+/* holiday card box */
+.cardbox { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 16px; margin-top: 16px; }
+.cardbox .photo { padding: 6px 6px 8px; }
+.cardbox .photo:nth-child(odd) { transform: rotate(-1deg); }
+.cardbox .photo:nth-child(even) { transform: rotate(1deg); }
+.cardbox figcaption { font-size: 17px; }
+
+/* piano */
+.piano { background: var(--paper) repeating-linear-gradient(180deg, transparent 0 18px, rgba(31,42,34,0.07) 18px 19px, transparent 19px 22px, rgba(31,42,34,0.07) 22px 23px, transparent 23px 26px, rgba(31,42,34,0.07) 26px 27px, transparent 27px 30px, rgba(31,42,34,0.07) 30px 31px, transparent 31px 34px, rgba(31,42,34,0.07) 34px 35px, transparent 35px 64px); padding-right: 110px; }
+.piano .clef { width: 54px; height: 120px; top: -26px; right: 22px; transform: rotate(8deg); }
+.piano .notes { width: 76px; height: 70px; top: 96px; right: 14px; transform: rotate(-8deg); }
+.piano .vinyl { width: 98px; height: 98px; top: auto; bottom: -30px; right: -24px; transform: rotate(-10deg); }
+.piano .phones { width: 74px; height: 74px; top: auto; bottom: -26px; right: 92px; transform: rotate(-12deg); }
+
+.musicrow { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 16px; }
+.musicrow > div { filter: drop-shadow(0 5px 7px rgba(0,0,0,0.25)); }
+.musicrow .sheet { width: 150px; height: 86px; transform: rotate(-4deg); }
+.musicrow .pkeys { width: min(100%, 300px); height: 64px; transform: rotate(2deg); }
+.musicrow svg { width: 100%; height: 100%; display: block; }
+
+/* hello */
+.hello-box { display: grid; gap: 16px; justify-items: start; position: relative; }
+.mail { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.mail code { font-family: var(--f-type); font-size: clamp(18px, 3vw, 26px); background: var(--paper); color: var(--ink); padding: 8px 16px; user-select: all; word-break: break-all; }
+.btn { background: var(--pink); color: var(--ink); border: 0; padding: 10px 18px; border-radius: 999px; cursor: pointer; font-family: var(--f-type); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.btn.ghost { background: none; border: 1.5px solid var(--ink); }
+.hello-row { display: flex; flex-wrap: wrap; gap: 26px; align-items: center; margin-top: 10px; }
+.hello-row .s { width: 74px; height: 74px; position: relative; filter: drop-shadow(0 5px 7px rgba(0,0,0,0.35)); }
+
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 18px clamp(18px, 4vw, 44px) 24px; color: var(--muted); border-top: 1px dashed var(--board-line); }
+
+/* lightbox */
+.lb { position: fixed; inset: 0; z-index: 30; background: rgba(18,26,20,0.92); display: grid; place-items: center; padding: max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb[hidden] { display: none; }
+.lb img { max-width: 100%; max-height: 80vh; background: var(--paper); padding: 8px; }
+.lb p { color: var(--cream); font-family: var(--f-hand); font-size: 24px; margin-top: 10px; text-align: center; max-width: 40ch; }
+.lb .x { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* star fun-fact popover */
+.fun { position: absolute; right: 4%; top: 18%; z-index: 5; background: var(--cream); color: var(--ink); padding: 14px 16px; max-width: 250px; font-size: 14.5px; line-height: 1.5; box-shadow: 0 12px 26px rgba(0,0,0,0.35); transform: rotate(2deg); }
+.fun[hidden] { display: none; }
+.fun .type { color: var(--pink-deep); display: block; margin-bottom: 4px; }
+
+@media (max-width: 940px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .collage { min-height: 500px; max-width: 460px; width: 100%; justify-self: center; }
+  .span-7, .span-5, .span-6, .span-4, .span-8 { grid-column: span 12; }
+  .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hero .swirl { left: auto; right: 0; }
+}
+@media (max-width: 520px) {
+  .board { border-radius: 16px; }
+  .oval { font-size: 11.5px; padding: 8px 18px; }
+  .collage { min-height: 420px; }
+  .boat { width: 122px; left: -2%; }
+  .sticker { font-size: 19px; max-width: 160px; left: -2%; }
+  .star { width: 84px; height: 84px; }
+  .hydra figcaption { font-size: 16px; }
+  .collage .hydra { width: 68%; right: 6%; }
+  .collage .bfly { width: 64px; height: 52px; right: 0; }
+  .hero .swirl { width: 120px; height: 90px; top: -10px; }
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .duo { grid-template-columns: minmax(0, 1fr); }
+  .trio { gap: 8px; }
+  .room-head { grid-template-columns: minmax(0, 1fr); }
+  .slip .deco, .photo .deco { width: 46px; height: 46px; right: -6px; }
+  .piano { padding-right: 24px; padding-top: 64px; }
+  .piano .clef { width: 40px; height: 90px; top: -20px; right: 12px; }
+  .piano .notes { top: 6px; right: 64px; width: 56px; height: 52px; }
+  .piano .phones { right: auto; left: 18px; top: -30px; bottom: auto; width: 60px; height: 60px; }
+  .piano .vinyl { width: 76px; height: 76px; right: -10px; bottom: -24px; }
+  .musicrow .sheet { width: 120px; height: 70px; }
+}
+</style>
+</head>
+<body>
+
+<!-- sticker sheet: silver, lace, pearls, polka dots, music -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#C9CECB"/><stop offset=".6" stop-color="#F4F5F2"/><stop offset="1" stop-color="#99A09B"/>
+    </linearGradient>
+    <radialGradient id="pearl" cx=".35" cy=".3" r=".75">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#EEEAE1"/><stop offset="1" stop-color="#C9C3B6"/>
+    </radialGradient>
+    <pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill="#FBF9F4"/><circle cx="2.2" cy="2.2" r="1.5" fill="#1E1E1E"/><circle cx="6.7" cy="6.7" r="1.5" fill="#1E1E1E"/>
+    </pattern>
+    <pattern id="dotsDark" width="7" height="7" patternUnits="userSpaceOnUse">
+      <rect width="7" height="7" fill="#1E1E1E"/><circle cx="1.8" cy="1.8" r="1" fill="#F3EDE1"/><circle cx="5.3" cy="5.3" r="1" fill="#F3EDE1"/>
+    </pattern>
+    <pattern id="mesh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#F8F4EC"/><path d="M0 0H6M0 0V6" stroke="#DDD5C6" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <symbol id="d-mirror" viewBox="0 0 60 124">
+    <ellipse cx="30" cy="36" rx="27" ry="33" fill="url(#silver)" stroke="#8E948F" stroke-width="1.4"/>
+    <ellipse cx="30" cy="36" rx="25" ry="31" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-dasharray="0 6" stroke-linecap="round" opacity=".85"/>
+    <ellipse cx="30" cy="36" rx="19" ry="25" fill="#E6ECEE" stroke="#A6ADA8"/>
+    <path d="M21 26 q4 -9 13 -10" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>
+    <path d="M26 68 h8 l-1 9 q5 6 0 12 l1 26 q-4 6 -8 0 l1 -26 q-5 -6 0 -12z" fill="url(#silver)" stroke="#8E948F" stroke-width="1.2"/>
+    <circle cx="30" cy="5" r="3.2" fill="url(#pearl)" stroke="#A6ADA8" stroke-width=".8"/>
+  </symbol>
+
+  <symbol id="d-heart" viewBox="0 0 100 92">
+    <path d="M50 86 C20 64 4 46 4 28 C4 14 15 4 28 4 C38 4 46 10 50 18 C54 10 62 4 72 4 C85 4 96 14 96 28 C96 46 80 64 50 86Z" fill="#FBF8F2" stroke="#F3EDE1" stroke-width="9" stroke-dasharray="0 7.5" stroke-linecap="round"/>
+    <path d="M50 76 C26 58 13 44 13 30 C13 19 21 12 30 12 C38 12 45 17 50 25 C55 17 62 12 70 12 C79 12 87 19 87 30 C87 44 74 58 50 76Z" fill="url(#mesh)" stroke="#D7CFBF" stroke-width="1.2"/>
+    <path d="M50 76 C26 58 13 44 13 30 C13 19 21 12 30 12 C38 12 45 17 50 25 C55 17 62 12 70 12 C79 12 87 19 87 30 C87 44 74 58 50 76Z" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-dasharray="1 3.5" stroke-linecap="round" transform="translate(50 44) scale(1.09) translate(-50 -44)"/>
+    <text x="50" y="47" text-anchor="middle" font-family="Caveat, cursive" font-size="15" font-weight="700" fill="#B9A9A0">with love</text>
+  </symbol>
+
+  <symbol id="d-butterfly" viewBox="0 0 100 82">
+    <g stroke="#BDBDB4" stroke-width="1.2">
+      <path d="M50 40 C42 10 14 -2 7 16 C1 33 24 42 50 43Z" fill="url(#dots)"/>
+      <path d="M50 44 C30 45 14 58 21 70 C28 80 45 64 50 47Z" fill="url(#dots)"/>
+      <path d="M50 40 C58 10 86 -2 93 16 C99 33 76 42 50 43Z" fill="url(#dots)"/>
+      <path d="M50 44 C70 45 86 58 79 70 C72 80 55 64 50 47Z" fill="url(#dots)"/>
+    </g>
+    <ellipse cx="50" cy="44" rx="2.6" ry="15" fill="#6B6F6A"/>
+    <path d="M49 30 C46 22 42 18 38 16 M51 30 C54 22 58 18 62 16" stroke="#6B6F6A" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="d-swirl" viewBox="0 0 170 128">
+    <g fill="none" stroke="#EEEEE9" stroke-width="4.6" stroke-linecap="round" stroke-dasharray="0 7">
+      <path d="M6 122 C24 82 62 104 78 74 C92 48 66 28 52 44 C42 56 58 70 68 60"/>
+      <path d="M78 74 C96 46 122 58 132 36 C142 14 120 4 110 16 C102 26 116 34 122 26"/>
+      <path d="M132 36 C146 30 158 40 164 52 C168 62 158 70 150 64"/>
+      <path d="M40 98 C34 86 22 84 16 90"/>
+    </g>
+    <g fill="url(#silver)" stroke="#9AA19C" stroke-width=".8">
+      <circle cx="68" cy="60" r="4.2"/><circle cx="122" cy="26" r="4.2"/><circle cx="150" cy="64" r="3.6"/><circle cx="78" cy="74" r="3.6"/>
+    </g>
+  </symbol>
+
+  <symbol id="d-key" viewBox="0 0 54 134">
+    <path d="M27 40 C10 30 2 52 14 60" fill="none" stroke="#F1D6E0" stroke-width="5" stroke-linecap="round" opacity=".95"/>
+    <path d="M27 40 C42 28 54 46 44 58 C40 64 46 72 52 70" fill="none" stroke="#F1D6E0" stroke-width="5" stroke-linecap="round" opacity=".95"/>
+    <circle cx="27" cy="22" r="17" fill="none" stroke="url(#silver)" stroke-width="6"/>
+    <circle cx="27" cy="22" r="17" fill="none" stroke="#8E948F" stroke-width=".8"/>
+    <circle cx="27" cy="14" r="4" fill="url(#silver)" stroke="#8E948F" stroke-width=".8"/>
+    <circle cx="20" cy="25" r="4" fill="url(#silver)" stroke="#8E948F" stroke-width=".8"/>
+    <circle cx="34" cy="25" r="4" fill="url(#silver)" stroke="#8E948F" stroke-width=".8"/>
+    <rect x="23.5" y="38" width="7" height="86" rx="2" fill="url(#silver)" stroke="#8E948F" stroke-width=".8"/>
+    <path d="M30.5 104 h12 v7 h-6 v5 h6 v8 h-12z" fill="url(#silver)" stroke="#8E948F" stroke-width=".8"/>
+    <rect x="21" y="44" width="12" height="4" rx="2" fill="url(#silver)" stroke="#8E948F" stroke-width=".6"/>
+  </symbol>
+
+  <symbol id="d-flower" viewBox="0 0 100 100">
+    <g fill="#FBF8F1" stroke="#C9C6BB" stroke-width="1.4">
+      <ellipse cx="50" cy="26" rx="18" ry="25"/>
+      <ellipse cx="50" cy="26" rx="18" ry="25" transform="rotate(72 50 50)"/>
+      <ellipse cx="50" cy="26" rx="18" ry="25" transform="rotate(144 50 50)"/>
+      <ellipse cx="50" cy="26" rx="18" ry="25" transform="rotate(216 50 50)"/>
+      <ellipse cx="50" cy="26" rx="18" ry="25" transform="rotate(288 50 50)"/>
+    </g>
+    <g fill="none" stroke="#E2DED3" stroke-width="1">
+      <path d="M50 44 V14"/><path d="M50 44 V14" transform="rotate(72 50 50)"/><path d="M50 44 V14" transform="rotate(144 50 50)"/><path d="M50 44 V14" transform="rotate(216 50 50)"/><path d="M50 44 V14" transform="rotate(288 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#silver)" stroke="#9AA19C"/>
+    <g fill="#FFFFFF"><circle cx="46" cy="47" r="2"/><circle cx="54" cy="49" r="1.6"/><circle cx="49" cy="55" r="1.6"/></g>
+  </symbol>
+
+  <symbol id="d-shell" viewBox="0 0 100 92">
+    <path d="M50 84 L12 36 C14 14 34 4 50 4 C66 4 86 14 88 36Z" fill="#F4EFE4" stroke="#BDB7A8" stroke-width="1.4"/>
+    <g stroke="#D3CBBB" stroke-width="1.6" fill="none">
+      <path d="M50 84 L18 24"/><path d="M50 84 L28 12"/><path d="M50 84 L40 6"/><path d="M50 84 V5"/><path d="M50 84 L60 6"/><path d="M50 84 L72 12"/><path d="M50 84 L82 24"/>
+    </g>
+    <path d="M40 80 L50 92 L60 80Z" fill="#E9E2D3" stroke="#BDB7A8"/>
+    <g fill="url(#pearl)" stroke="#CFC8B9" stroke-width=".7">
+      <circle cx="30" cy="20" r="4"/><circle cx="62" cy="30" r="5"/><circle cx="72" cy="44" r="3.4"/><circle cx="40" cy="48" r="3"/><circle cx="56" cy="62" r="3.6"/>
+    </g>
+  </symbol>
+
+  <symbol id="d-clef" viewBox="0 0 60 140">
+    <path d="M30 124 L34 20 C36 6 48 8 44 22 C40 36 16 48 13 70 C10 92 30 103 44 93 C56 83 48 62 32 66 C20 70 22 86 33 86" fill="none" stroke="url(#dotsDark)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M30 124 C28 134 16 134 15 125 C14 118 22 115 25 120" fill="none" stroke="url(#dotsDark)" stroke-width="7" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="d-notes" viewBox="0 0 80 76">
+    <g fill="url(#dotsDark)">
+      <ellipse cx="17" cy="62" rx="11" ry="8" transform="rotate(-20 17 62)"/>
+      <ellipse cx="59" cy="54" rx="11" ry="8" transform="rotate(-20 59 54)"/>
+      <rect x="24" y="14" width="5" height="48"/>
+      <rect x="66" y="6" width="5" height="46"/>
+      <polygon points="24,14 71,4 71,15 24,25"/>
+    </g>
+  </symbol>
+
+  <symbol id="d-vinyl" viewBox="0 0 100 100">
+    <path d="M10 18 L30 4 L60 8 L88 2 L96 30 L92 60 L98 86 L66 96 L36 92 L6 98 L4 64 L8 40Z" fill="#EFE7D6"/>
+    <circle cx="50" cy="50" r="40" fill="#1E1E1E"/>
+    <g fill="none" stroke="#3B3B3B" stroke-width="1"><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="25"/><circle cx="50" cy="50" r="20"/></g>
+    <path d="M24 30 A34 34 0 0 1 46 17" stroke="#6A6A6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="50" cy="50" r="12" fill="#C9C2B2"/><circle cx="50" cy="50" r="2" fill="#EFE7D6"/>
+  </symbol>
+
+  <symbol id="d-phones" viewBox="0 0 100 100">
+    <g fill="none" stroke="#1E1E1E" stroke-linecap="round">
+      <path d="M18 62 C16 20 84 20 82 62" stroke-width="5"/>
+      <path d="M21 60 C20 26 80 26 79 60" stroke-width="1.4"/>
+      <path d="M82 84 C80 98 60 98 52 92 C44 86 36 94 30 98" stroke-width="2"/>
+    </g>
+    <rect x="9" y="54" width="17" height="30" rx="7" fill="#1E1E1E"/>
+    <rect x="74" y="54" width="17" height="30" rx="7" fill="#1E1E1E"/>
+    <path d="M12 60 l10 18 M14 58 l9 16 M77 58 l10 18 M79 60 l8 15" stroke="#4A4A4A" stroke-width="1.2"/>
+  </symbol>
+
+  <symbol id="d-sheet" viewBox="0 0 160 92">
+    <path d="M4 10 L22 4 L40 9 L62 2 L84 8 L104 3 L128 8 L156 4 L152 30 L158 52 L150 88 L120 84 L96 90 L70 85 L44 90 L20 86 L2 88 L6 60 L2 34Z" fill="#F1E9D6"/>
+    <g stroke="#6B6458" stroke-width=".9"><path d="M10 20H150M10 25H150M10 30H150M10 35H150M10 40H150"/><path d="M10 56H150M10 61H150M10 66H150M10 71H150M10 76H150"/></g>
+    <g fill="#2A2724">
+      <ellipse cx="36" cy="35" rx="3.6" ry="2.6"/><rect x="38.6" y="18" width="1.2" height="17"/>
+      <ellipse cx="52" cy="30" rx="3.6" ry="2.6"/><rect x="54.6" y="14" width="1.2" height="16"/>
+      <ellipse cx="74" cy="25" rx="3.6" ry="2.6"/><ellipse cx="88" cy="30" rx="3.6" ry="2.6"/><rect x="76.6" y="10" width="1.2" height="15"/><rect x="90.6" y="10" width="1.2" height="20"/><rect x="76.6" y="10" width="15.2" height="2.4"/>
+      <ellipse cx="112" cy="40" rx="3.6" ry="2.6"/><rect x="114.6" y="24" width="1.2" height="16"/>
+      <ellipse cx="40" cy="66" rx="3.6" ry="2.6"/><rect x="42.6" y="50" width="1.2" height="16"/>
+      <ellipse cx="64" cy="71" rx="3.6" ry="2.6"/><ellipse cx="78" cy="61" rx="3.6" ry="2.6"/><rect x="66.6" y="48" width="1.2" height="23"/><rect x="80.6" y="48" width="1.2" height="13"/><rect x="66.6" y="48" width="15.2" height="2.4"/>
+      <ellipse cx="108" cy="56" rx="3.6" ry="2.6"/><rect x="110.6" y="40" width="1.2" height="16"/>
+    </g>
+  </symbol>
+
+  <symbol id="d-keys" viewBox="0 0 312 64" preserveAspectRatio="xMidYMid meet">
+    <rect x="1" y="1" width="310" height="62" rx="5" fill="#F3EDE1" stroke="#D5CDBE"/>
+    <rect x="6" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="27" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="48" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="69" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="90" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="111" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="132" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="153" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="174" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="195" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="216" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="237" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="258" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/><rect x="279" y="6" width="21" height="52" rx="2" fill="#FFFDF8" stroke="#1E1E1E" stroke-width="1.6"/>
+    <rect x="20.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="41.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="83.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="104.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="125.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="167.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="188.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="230.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="251.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/><rect x="272.5" y="6" width="13" height="31" rx="1.5" fill="#1E1E1E"/>
+  </symbol>
+
+  <symbol id="d-sparkle" viewBox="0 0 40 40">
+    <path d="M20 2 C22 14 26 18 38 20 C26 22 22 26 20 38 C18 26 14 22 2 20 C14 18 18 14 20 2Z" fill="url(#silver)" stroke="#9AA19C" stroke-width=".8"/>
+  </symbol>
+</svg>
+
+<div class="frame">
+<div class="board">
+  <div class="bar">
+    <a class="brand type" href="#research">Sersi / personal space</a>
+    <ul class="tabs" role="tablist" aria-label="Sections">
+      <li><button class="type" role="tab" data-room="research" aria-selected="true">Research</button></li>
+      <li><button class="type" role="tab" data-room="community" aria-selected="false">Community</button></li>
+      <li><button class="type" role="tab" data-room="art" aria-selected="false">Art &amp; Design</button></li>
+      <li><button class="type" role="tab" data-room="life" aria-selected="false">Life &amp; Culture</button></li>
+      <li><button class="type" role="tab" data-room="academics" aria-selected="false">Academics</button></li>
+      <li><button class="type" role="tab" data-room="hello" aria-selected="false">Say Hello</button></li>
+    </ul>
+  </div>
+
+  <header class="hero">
+    <div class="art-ghost ghost-1" aria-hidden="true"><img src="img/bunny_final.jpg" alt=""></div>
+    <div class="deco swirl" aria-hidden="true"><svg><use href="#d-swirl"/></svg></div>
+    <div style="position:relative;z-index:1">
+      <div class="type hello">Hello, I'm</div>
+      <h1>Sersi<span class="deco" aria-hidden="true"><svg><use href="#d-heart"/></svg></span></h1>
+      <div class="full">Feixi Wu · Brownell Talbot School · Omaha, NE · Class of 2027</div>
+      <p class="lede">I notice the gaps between what people make and who gets to see it: a lantern no tourist can tell apart from a factory copy, an email inbox a grandmother can't open, a comic that never crosses a firewall. Then I try to close them, with data, design, and paint.</p>
+      <div class="oval">a little corner of the internet ✦</div>
+    </div>
+    <div class="collage">
+      <div class="pinkpaper" aria-hidden="true"></div>
+      <figure class="hydra photo"><img src="img/hydrangea.jpg" alt="Sersi sitting on wooden steps among blue and pink hydrangeas on a mossy hillside" data-cap="Among the hydrangeas"><figcaption>hydrangea season ✿</figcaption></figure>
+      <div class="deco bfly" aria-hidden="true"><svg><use href="#d-butterfly"/></svg></div>
+      <button class="star" id="star" type="button" aria-expanded="false" aria-controls="fun" aria-label="Show a fun fact">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><polygon fill="#F3EDE1" points="50,2 58,34 88,14 68,42 98,50 68,58 88,86 58,66 50,98 42,66 12,86 32,58 2,50 32,42 12,14 42,34"/><text x="50" y="55" text-anchor="middle" font-family="Courier Prime, monospace" font-size="10" font-weight="700" fill="#1F2A22">TAP ME</text></svg>
+      </button>
+      <div class="fun" id="fun" hidden><span class="type">fun fact <span id="funNo">1</span>/4</span><span id="funText"></span></div>
+      <div class="sticker">from Haining, Zhejiang → Omaha, Nebraska</div>
+      <figure class="boat photo"><img src="img/hero_boat.jpg" alt="A wooden boat filled with blue and white flowers on misty green water" data-cap="Hangzhou, Zhejiang · June 10, 2025"><figcaption>Hangzhou · 2025.6.10</figcaption></figure>
+    </div>
+  </header>
+
+  <main class="rooms">
+
+    <!-- RESEARCH -->
+    <section class="room" id="room-research" role="tabpanel" aria-label="Research">
+      <div class="room-head">
+        <div><h2>Research<span class="hd" aria-hidden="true"><svg><use href="#d-key"/></svg></span></h2><p>Two summers in my hometown of Haining, China: one desk inside a local government office, and one question about why a national heritage craft is disappearing.</p></div>
+        <div class="count type">Summers 2025 &amp; 2026</div>
+      </div>
+      <div class="grid">
+        <article class="slip pin span-6">
+          <div class="type">Municipal internship · Haining, China</div>
+          <h3>Investment Promotion Department, Haining Warp Knitting Industrial Zone Management Committee</h3>
+          <ul>
+            <li>Organized enterprise data and documented meetings for the department.</li>
+            <li>Joined officials on industry visits to Nanjing, Suzhou, Guangzhou, and Shenzhen to see how local governments evaluate investments and regional development.</li>
+          </ul>
+          <p style="margin-top:10px;font-size:14px;color:#66736A">An official internship certificate is linked in my application.</p>
+        </article>
+        <article class="slip span-6">
+          <div class="deco" aria-hidden="true"><svg><use href="#d-sparkle"/></svg></div>
+          <div class="type">Independent economic research</div>
+          <h3>Why Xiashi lantern making is fading</h3>
+          <p>Xiashi lanterns are a national intangible cultural heritage: paper panels pierced by hand, thousands of needle holes at a time. While the department evaluated Haining Xiashi Lantern Co., I interviewed two master artisans and the company's founder about apprenticeship, machines, and whether the craft still pays a living.</p>
+          <div class="more" id="m-find" hidden>
+            <div class="finding"><div class="type">Finding 1</div><p>A municipal talent-support plan meant to last three years stretched to five, and young apprentices stopped staying.</p></div>
+            <div class="finding"><div class="type">Finding 2</div><p>Limited tourism promotion meant few visitors could tell hand-pierced work from cheaper souvenirs.</p></div>
+            <div class="finding"><div class="type">Result</div><p>Haining's own lantern festivals began relying on cheaper manufacturers in Sichuan instead of local artisans.</p></div>
+            <p style="margin-top:12px;font-size:14px;color:#66736A">Written up in a three-page field report.</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false" aria-controls="m-find">See my findings</button>
+        </article>
+        <figure class="photo tilt-b span-4"><img src="img/zhang_kexi.jpg" alt="Sersi beside Zhang Kexi in a lantern heritage shop" data-cap="With Zhang Kexi, Xiashi lantern heritage artist, Haining Xiashi Lantern Co."><figcaption>with heritage artist Zhang Kexi, Haining Xiashi Lantern Co.</figcaption></figure>
+        <div class="span-8" style="min-width:0">
+          <div class="strip">
+            <figure class="photo"><img src="img/lantern_taiping.jpg" alt="Needle-pierced vase-shaped lantern glowing in a case" data-cap="Taiping Ruyi lantern · 35 × 35 × 60 cm" loading="lazy"><figcaption>Taiping Ruyi</figcaption></figure>
+            <figure class="photo"><img src="img/lantern_sijunzi.jpg" alt="Standing lantern with painted chrysanthemums" data-cap="Four Gentlemen lantern · 35 × 35 × 70 cm" loading="lazy"><figcaption>Four Gentlemen</figcaption></figure>
+            <figure class="photo"><img src="img/lantern_pagoda.jpg" alt="Tall lit pagoda lantern in a dark hall" data-cap="Pagoda lantern" loading="lazy"><figcaption>Pagoda</figcaption></figure>
+            <figure class="photo"><img src="img/lantern_huazun.jpg" alt="Hexagonal paper-cut lantern glowing in a case" data-cap="Paper-cut flower vase lantern · 22 × 22 × 36 cm" loading="lazy"><figcaption>Flower vase</figcaption></figure>
+            <figure class="photo"><img src="img/lantern_lotus.jpg" alt="A hand holding up a pink lotus lantern" data-cap="Lotus lantern in the heritage shop" loading="lazy"><figcaption>Lotus</figcaption></figure>
+          </div>
+          <p class="note">Tap any lantern to see it larger, with its size.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="room" id="room-community" role="tabpanel" aria-label="Community" hidden>
+      <div class="room-head">
+        <div><h2>Community<span class="hd" aria-hidden="true"><svg><use href="#d-heart"/></svg></span></h2><p>Most of my service happens beside one person at a time: a resident at a senior home, a fourth grader with a math worksheet, a kid waiting for face paint.</p></div>
+        <div class="count type">Grades 9–12</div>
+      </div>
+      <div class="grid">
+        <figure class="photo tilt-a span-7"><img src="img/nhts.jpg" alt="Four NHTS volunteers on a bench outside New Cassel; three faces covered with white circles for privacy, Sersi on the right" data-cap="Our first NHTS visit at New Cassel, Omaha"><figcaption>our first NHTS visit at New Cassel, Omaha · other faces hidden for privacy</figcaption></figure>
+        <article class="slip pin span-5">
+          <div class="type">Grades 11–12 · Director of Social Media &amp; Core Volunteer</div>
+          <h3>Nebraska High School Tech Support</h3>
+          <p>An independent, student-run organization. Volunteers from four Omaha high schools train weekly, then visit retirement communities to fix residents' devices.</p>
+          <div class="facts"><div class="fact"><div class="n">50+</div><div class="t">residents' email recovered</div></div><div class="fact"><div class="n">4</div><div class="t">partner high schools</div></div></div>
+          <div class="more" id="m-nhts" hidden>
+            <ul>
+              <li>Troubleshoot hardware and software on site, and recover locked email accounts so residents can reach their families again.</li>
+              <li>Run our Instagram, LinkedIn, and YouTube, and designed flyers for an Omaha community culture fair.</li>
+            </ul>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false" aria-controls="m-nhts">Read more</button>
+        </article>
+        <article class="slip pink-slip span-12">
+          <div class="deco" aria-hidden="true" style="width:70px;height:70px;top:-28px;right:-10px"><svg><use href="#d-flower"/></svg></div>
+          <div class="type">Grade 11 · Art Club · Digital illustrator</div>
+          <h3>Holiday cards for senior homes</h3>
+          <p>I drew personalized holiday cards and prints for nursing home residents, matching designs to residents' interests with the activity coordinators. These spreads come from our Art Club's printable folded-card set.</p>
+          <div class="more" id="m-cards" hidden>
+            <div class="cardbox">
+              <figure class="photo"><img src="img/card_1.jpg" alt="Folded holiday card: a red velvet bow and a Happy Holidays front" data-cap="Holiday card spread · Brownell Talbot Art Club" loading="lazy"><figcaption>velvet bow</figcaption></figure>
+              <figure class="photo"><img src="img/card_3.jpg" alt="Folded holiday card with ornaments and a watercolor tree" data-cap="Holiday card spread · Brownell Talbot Art Club" loading="lazy"><figcaption>watercolor tree</figcaption></figure>
+              <figure class="photo"><img src="img/card_5.jpg" alt="Dark green holiday card with berries and leaves" data-cap="Holiday card spread · Brownell Talbot Art Club" loading="lazy"><figcaption>winter berries</figcaption></figure>
+              <figure class="photo"><img src="img/card_7.jpg" alt="Happy holidays card with a cup of cocoa in the snow" data-cap="Holiday card spread · Brownell Talbot Art Club" loading="lazy"><figcaption>cocoa in the snow</figcaption></figure>
+              <figure class="photo"><img src="img/card_9.jpg" alt="Hand-drawn Santa and reindeer card" data-cap="Holiday card spread · Brownell Talbot Art Club" loading="lazy"><figcaption>Santa &amp; reindeer</figcaption></figure>
+              <figure class="photo"><img src="img/card_11.jpg" alt="Happy holidays card with a hand-lettered garland" data-cap="Holiday card spread · Brownell Talbot Art Club" loading="lazy"><figcaption>garland lettering</figcaption></figure>
+              <figure class="photo"><img src="img/card_44.jpg" alt="Snowy card with pine trees and string lights" data-cap="Holiday card spread · Brownell Talbot Art Club" loading="lazy"><figcaption>snowy pines</figcaption></figure>
+            </div>
+            <p style="margin-top:12px;font-size:14px">Tap a card to see the full spread.</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false" aria-controls="m-cards">Open the card box ✉</button>
+        </article>
+        <article class="slip span-6">
+          <div class="type">Grades 9–12 · Classroom mentor</div>
+          <h3>Cross Age Mentoring</h3>
+          <p>I guide fourth graders through mental multiplication, long division, guided reading, and art crafts alongside their teachers.</p>
+        </article>
+        <article class="slip span-6">
+          <div class="type">Grades 9–11 · Event artist</div>
+          <h3>Face paint for 150+ kids</h3>
+          <p>I ran face-painting booths at the Lights on Dundee winter festival and painted mascot designs for fans at Homecoming.</p>
+        </article>
+        <article class="slip span-12">
+          <div class="type">Grades 11–12 · National Honor Society</div>
+          <p style="margin-top:6px">Monthly service drives with NHS: Omaha park cleanups, sorting food donations, and deep-cleaning living facilities at the Open Door Mission homeless shelter.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ART & DESIGN -->
+    <section class="room" id="room-art" role="tabpanel" aria-label="Art and Design" hidden>
+      <div class="room-head">
+        <div><h2>Art &amp; Design<span class="hd" aria-hidden="true" style="width:.6em;height:1.2em"><svg><use href="#d-mirror"/></svg></span></h2><p>My studio work lives in my portfolio. Here is the art I make with and for other people: walls, invitations, and exhibitions.</p></div>
+        <div class="count type">NAHS Vice President · Grade 12</div>
+      </div>
+      <div class="grid">
+        <article class="slip pin span-5">
+          <div class="type">Grades 9–12 · Vice President &amp; Lead Muralist</div>
+          <h3>National Art Honor Society murals</h3>
+          <ul>
+            <li><b>Grade 9:</b> community mural with Jesuit Academy, JPYD of Omaha, and The Hot Shops Art Center.</li>
+            <li><b>Grade 11:</b> conceptualized and painted a three-wall jazz studio mural in Omaha's Little Italy.</li>
+            <li><b>Grade 12:</b> repainting the faded garden fence at Brownell Talbot Lower School (in progress).</li>
+          </ul>
+          <p style="margin-top:10px">For each one I helped brainstorm themes, scale sketches into grids, mix palettes, and assign sections to student painters.</p>
+        </article>
+        <div class="span-7" style="min-width:0">
+          <div class="duo">
+            <figure class="photo tilt-a"><img src="img/jazz_progress.jpg" alt="Students painting a blue and orange jazz musician mural" data-cap="Jazz Studio Mural, Little Italy, Omaha" loading="lazy"><figcaption>jazz studio mural, Little Italy</figcaption></figure>
+            <figure class="photo tilt-b"><img src="img/jazz_chalk_night.jpg" alt="Chalk outlines of musicians on dark brick at night" data-cap="Drawing the jazz mural in chalk at night" loading="lazy"><figcaption>chalk outlines at night</figcaption></figure>
+            <figure class="photo tilt-b"><img src="img/jpyd_design.jpg" alt="Printed mural design taped beside paint swatches" data-cap="Community mural design with JPYD (Grade 9)" loading="lazy"><figcaption>JPYD mural design, mixing skin tones</figcaption></figure>
+            <figure class="photo tilt-a"><img src="img/fence_before.jpg" alt="A faded painted fence beside school garden beds" data-cap="Lower School fence, before repainting" loading="lazy"><figcaption>Lower School fence · before</figcaption></figure>
+          </div>
+        </div>
+        <figure class="photo tilt-b span-5"><div class="deco" aria-hidden="true"><svg><use href="#d-sparkle"/></svg></div><img src="img/chapel_invite.jpg" alt="Hand-drawn digital illustration of two snowmen in a snowy night field" data-cap="Senior Winter Chapel invitation art" loading="lazy"><figcaption>Senior Winter Chapel invitation</figcaption></figure>
+        <article class="slip pink-slip span-7">
+          <div class="type">Grade 12 · Creative Director</div>
+          <h3>Senior Winter Chapel</h3>
+          <p>Our class officers first planned an AI-generated cover. I photographed campus for reference, drew the winter scene by hand, and the class voted for it. I then designed the official posters and invitation suite and prepared the files for print runs for 100+ families.</p>
+        </article>
+        <article class="slip span-6">
+          <div class="type">Grades 9–11 · Assistant curator</div>
+          <h3>Exhibitions</h3>
+          <p>With Omaha Public Schools, I curated, matted, and labeled 200+ entries for the regional Scholastic Art &amp; Writing Awards exhibition, and built gallery displays for our school's Rally for the Arts.</p>
+        </article>
+        <article class="slip span-6">
+          <div class="deco" aria-hidden="true" style="width:48px;height:100px;top:-30px"><svg><use href="#d-key"/></svg></div>
+          <div class="type">Recognition</div>
+          <div class="list">
+            <div class="row"><div class="w">Scholastic Gold Key, Photography<small>Grade 11</small></div><div class="l">Regional</div></div>
+            <div class="row"><div class="w">Scholastic Silver Key, Digital Painting, Drawing &amp; Collage<small>Grade 11</small></div><div class="l">Regional</div></div>
+            <div class="row"><div class="w">Scholastic Silver Key, Photography<small>Grade 9</small></div><div class="l">Regional</div></div>
+          </div>
+        </article>
+      </div>
+      <p class="note">My full visual art portfolio is linked in my application.</p>
+    </section>
+
+    <!-- LIFE & CULTURE -->
+    <section class="room" id="room-life" role="tabpanel" aria-label="Life and Culture" hidden>
+      <div class="room-head">
+        <div><h2>Life &amp; Culture<span class="hd" aria-hidden="true"><svg><use href="#d-shell"/></svg></span></h2><p>The projects I do because I can't stop myself, and the culture I carry between two homes.</p></div>
+        <div class="count type">Off the clock</div>
+      </div>
+      <div class="grid">
+        <article class="slip pin span-6">
+          <div class="type">Grades 9–12 · Translator &amp; letterer</div>
+          <h3>Comic localization on Douyin</h3>
+          <p>Many Western webcomics are unavailable in China because of the Great Firewall. With each artist's permission on X, TikTok, or YouTube, I translate their pages into Chinese, rebuild the lettering, and post them on Douyin with credit.</p>
+          <div class="facts"><div class="fact"><div class="n">1.3M+</div><div class="t">views</div></div><div class="fact"><div class="n">138K+</div><div class="t">likes</div></div><div class="fact"><div class="n">2.6K+</div><div class="t">comments</div></div></div>
+          <div class="dy"><a class="btn" href="https://v.douyin.com/cLiWPfTfTlQ/" target="_blank" rel="noopener">Visit my Douyin ↗</a><span class="type">@FiX · Douyin ID: feixi_1124oxo</span></div>
+          <p style="font-size:13.5px;color:#66736A">Art © wallen (<a href="https://x.com/llastwill/status/1854512820278460486" target="_blank" rel="noopener" style="color:#B5637F">@llastwill</a>), used with permission. Chinese translation and lettering by Sersi.</p>
+        </article>
+        <div class="span-6" style="min-width:0">
+          <div class="trio">
+            <figure class="photo tilt-a"><img src="img/comic_01.jpg" alt="Translated comic page: two characters meet" data-cap="Translated page 1 · art © wallen, used with permission" loading="lazy"></figure>
+            <figure class="photo"><img src="img/comic_02.jpg" alt="Translated comic page with a Chinese speech bubble" data-cap="Translated page 2 · art © wallen, used with permission" loading="lazy"></figure>
+            <figure class="photo tilt-b"><img src="img/comic_03.jpg" alt="Translated comic page close-up" data-cap="Translated page 3 · art © wallen, used with permission" loading="lazy"></figure>
+          </div>
+        </div>
+        <figure class="photo tilt-a span-7"><div class="deco" aria-hidden="true" style="width:80px;height:66px;top:-30px;right:-16px"><svg><use href="#d-butterfly"/></svg></div><img src="img/fair.jpg" alt="Students behind the Chinese culture table at the Multicultural Fair; Sersi in a green polo, everyone else's face covered with a white circle" data-cap="Multicultural Fair · our Chinese culture station (I'm in green)" loading="lazy"><figcaption>Multicultural Fair · I'm in green · other faces hidden for privacy</figcaption></figure>
+        <article class="slip pink-slip span-5">
+          <div class="type">Grades 9–12 · Multicultural Fair</div>
+          <h3>A Chinese culture station</h3>
+          <p>Every year I run our school's Chinese station: calligraphy and spring-couplet paper, trivia games, illustrated posters, and fresh grass jelly and milk tea for 100+ visitors.</p>
+        </article>
+        <article class="slip span-5">
+          <div class="type">Grades 10–12 · Small business</div>
+          <h3>Vintage reseller</h3>
+          <p>I source, authenticate, and resell limited-edition film cameras and rare albums, including a signed Taylor Swift album I resold to fans in China, for $500+ in profit.</p>
+        </article>
+        <article class="slip piano span-7">
+          <div class="deco phones" aria-hidden="true"><svg><use href="#d-phones"/></svg></div>
+          <div class="deco clef" aria-hidden="true"><svg><use href="#d-clef"/></svg></div>
+          <div class="deco notes" aria-hidden="true"><svg><use href="#d-notes"/></svg></div>
+          <div class="deco vinyl" aria-hidden="true"><svg><use href="#d-vinyl"/></svg></div>
+          <div class="type">Music · Chinese Musicians Association</div>
+          <h3>Piano, Level 10</h3>
+          <p>The highest grade of the Chinese Musicians Association piano examination.</p>
+          <div class="musicrow" aria-hidden="true">
+            <div class="sheet"><svg><use href="#d-sheet"/></svg></div>
+            <div class="pkeys"><svg><use href="#d-keys"/></svg></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ACADEMICS -->
+    <section class="room" id="room-academics" role="tabpanel" aria-label="Academics" hidden>
+      <div class="room-head">
+        <div><h2>Academics<span class="hd" aria-hidden="true" style="width:1.3em"><svg><use href="#d-swirl"/></svg></span></h2><p>Brownell Talbot School, Omaha, Nebraska, plus college courses at the University of Nebraska at Omaha and UCLA.</p></div>
+        <div class="count type">Aug 2023 – May 2027</div>
+      </div>
+      <div class="grid">
+        <article class="slip pin span-5">
+          <div class="type">Grades &amp; exams</div>
+          <div class="facts"><div class="fact"><div class="n">4.00</div><div class="t">GPA (weighted)</div></div><div class="fact"><div class="n">4.00</div><div class="t">college GPA, UNO</div></div></div>
+          <ul>
+            <li>AP Scholar with Distinction (2026)</li>
+            <li>AP: Calculus BC 5, Calculus AB 5, European History 4, Chemistry 4, 2-D Art and Design 4</li>
+            <li>Senior year: AP Biology, AP Statistics, Microeconomics and Macroeconomics</li>
+          </ul>
+        </article>
+        <article class="slip span-7">
+          <div class="type">College coursework</div>
+          <div class="list">
+            <div class="row"><div class="w">General Chemistry I and Lab<small>University of Nebraska at Omaha · Spring 2026</small></div><div class="l">A · A</div></div>
+            <div class="row"><div class="w">General Physics II, Calculus Level<small>University of Nebraska at Omaha · Spring 2026</small></div><div class="l">A+</div></div>
+            <div class="row"><div class="w">Introduction to Applied Statistics for IST<small>University of Nebraska at Omaha · Fall 2026</small></div><div class="l">In progress</div></div>
+            <div class="row"><div class="w">Principles of Economics<small>UCLA, online · Summer 2026</small></div><div class="l">College credit</div></div>
+          </div>
+        </article>
+        <article class="slip span-7">
+          <div class="type">Math team &amp; coaching · Grades 9–12</div>
+          <h3>Competing, then coaching</h3>
+          <div class="list">
+            <div class="row"><div class="w">UNL Nebraska Math Day: #22 statewide, Probe I<small>2025 · 3-time qualifier for the Probe II advanced round</small></div><div class="l">State</div></div>
+            <div class="row"><div class="w">American Scholastic Mathematics Association: School Top Scorer<small>Grades 9–11</small></div><div class="l">School</div></div>
+          </div>
+          <div class="more" id="m-coach" hidden>
+            <p>I coach 10+ Brownell Talbot middle school students preparing for the annual Duchesne Math Contest. My modules cover probability, number bases, and mental math for speed rounds. I also compete with the Science Quiz Bowl team.</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false" aria-controls="m-coach">How I coach</button>
+        </article>
+        <article class="slip pink-slip span-5">
+          <div class="type">Languages &amp; teams</div>
+          <div class="list">
+            <div class="row"><div class="w">National Spanish Exam, Bronze Medal<small>Level 1 (Grade 9) and Level 3 (Grade 11)</small></div><div class="l">National</div></div>
+            <div class="row"><div class="w">AAPPL Spanish: Intermediate speaking</div><div class="l">Spanish</div></div>
+            <div class="row"><div class="w">Girls Basketball: Conference Tournament Champions<small>Grade 9</small></div><div class="l">Team</div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- HELLO -->
+    <section class="room" id="room-hello" role="tabpanel" aria-label="Say Hello" hidden>
+      <div class="room-head">
+        <div><h2>Say Hello</h2><p>Questions about my research, murals, or translations are always welcome.</p></div>
+      </div>
+      <div class="hello-box">
+        <div class="mail"><code id="email">sersiwoo@gmail.com</code><button class="btn" id="copy" type="button">Copy email</button></div>
+        <p class="type" style="color:var(--muted)">Languages: Mandarin · English · Spanish</p>
+        <div class="hello-row" aria-hidden="true">
+          <div class="s" style="transform:rotate(-10deg)"><svg width="100%" height="100%"><use href="#d-flower"/></svg></div>
+          <div class="s" style="width:40px;height:84px;transform:rotate(12deg)"><svg width="100%" height="100%"><use href="#d-mirror"/></svg></div>
+          <div class="s" style="transform:rotate(6deg)"><svg width="100%" height="100%"><use href="#d-butterfly"/></svg></div>
+          <div class="s" style="transform:rotate(-6deg)"><svg width="100%" height="100%"><use href="#d-shell"/></svg></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="type"><span>© 2026 Feixi (Sersi) Wu</span><span>Haining, Zhejiang ✦ Omaha, Nebraska</span></footer>
+</div>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged image">
+  <button class="btn x" id="lbClose" type="button">Close</button>
+  <div style="display:grid;justify-items:center"><img id="lbImg" alt=""><p id="lbCap"></p></div>
+</div>
+
+<script>
+(function () {
+  var rooms = ['research', 'community', 'art', 'life', 'academics', 'hello'];
+  var alias = { service: 'community', school: 'academics' };
+  var tabs = document.querySelectorAll('.tabs button');
+  function show(name, scroll) {
+    name = alias[name] || name;
+    if (rooms.indexOf(name) < 0) name = 'research';
+    rooms.forEach(function (r) { document.getElementById('room-' + r).hidden = (r !== name); });
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.room === name ? 'true' : 'false'); });
+    if (scroll) document.querySelector('.rooms').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      if (location.hash !== '#' + t.dataset.room) { history.replaceState(null, '', '#' + t.dataset.room); }
+      show(t.dataset.room, true);
+    });
+  });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), true); });
+  show(location.hash.slice(1), false);
+  document.querySelector('.brand').addEventListener('click', function (e) { e.preventDefault(); show('research', true); });
+
+  document.querySelectorAll('.toggle').forEach(function (b) {
+    var label = b.textContent;
+    b.addEventListener('click', function () {
+      var m = document.getElementById(b.getAttribute('aria-controls'));
+      var open = m.hidden; m.hidden = !open;
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      b.textContent = open ? 'Close' : label;
+    });
+  });
+
+  var facts = [
+    'I have translated 40+ comic installments into Chinese, letter by letter.',
+    'A Xiashi lantern panel can hold thirty needle holes in a single square centimeter.',
+    'My jazz mural started as chalk lines drawn on dark brick at night.',
+    'I have recovered locked email accounts for more than 50 senior residents in Omaha.'
+  ];
+  var star = document.getElementById('star'), fun = document.getElementById('fun'), i = -1;
+  star.addEventListener('click', function () {
+    i = (i + 1) % (facts.length + 1);
+    if (i === facts.length) { fun.hidden = true; star.setAttribute('aria-expanded', 'false'); return; }
+    document.getElementById('funText').textContent = facts[i];
+    document.getElementById('funNo').textContent = i + 1;
+    fun.hidden = false; star.setAttribute('aria-expanded', 'true');
+  });
+
+  /* lightbox */
+  var lb = document.getElementById('lb'), im = document.getElementById('lbImg'), cap = document.getElementById('lbCap'), last = null;
+  function open(img) { last = img; im.src = img.getAttribute('src'); im.alt = img.alt; cap.textContent = img.getAttribute('data-cap') || ''; lb.hidden = false; document.getElementById('lbClose').focus(); }
+  function close() { lb.hidden = true; im.removeAttribute('src'); if (last) last.focus(); }
+  document.querySelectorAll('.photo img').forEach(function (img) {
+    img.tabIndex = 0;
+    img.addEventListener('click', function () { open(img); });
+    img.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); } });
+  });
+  document.getElementById('lbClose').addEventListener('click', close);
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
+
+  var btn = document.getElementById('copy'), email = document.getElementById('email');
+  btn.addEventListener('click', function () {
+    function sel() { var r = document.createRange(); r.selectNodeContents(email); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; }
+    try { navigator.clipboard.writeText(email.textContent.trim()).then(function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy email'; }, 1800); }, sel); } catch (e) { sel(); }
+  });
+})();
+</script>
+
+</body>
+</html>
